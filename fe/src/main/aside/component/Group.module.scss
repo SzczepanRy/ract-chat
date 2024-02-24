@@ -1,0 +1,23 @@
+@use "../../../global" as *;
+
+.group {
+    @include centerDiv(column);
+
+    width: 80%;
+    border: 2px solid $dark;
+    border-radius: 5px;
+    padding: 5px;
+    color: $dark;
+    &:hover {
+        cursor: pointer;
+        background-color: $dark;
+        border: 2px solid $basic;
+        color: $basic;
+    }
+    .groupON {
+        display: block;
+    }
+    .groupOFF {
+        display: none;
+    }
+}

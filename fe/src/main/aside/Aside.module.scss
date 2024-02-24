@@ -1,0 +1,18 @@
+@use "../../global" as *;
+
+.aside {
+    height: calc(100vh - 100px);
+    width: 200px;
+    // @include centerDiv();
+
+    .groups {
+        all: unset;
+        height: 100%;
+        width: 100%;
+        @include centerDiv(column);
+        justify-content: flex-start;
+        padding-top: 20px;
+        gap: 5px;
+        background-color: $basic;
+    }
+}

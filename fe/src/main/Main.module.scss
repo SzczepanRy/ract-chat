@@ -1,0 +1,76 @@
+@use "../global" as *;
+.main {
+    display: flex;
+
+    width: 100vw;
+    height: calc(100vh - 80px);
+    .body {
+        @include centerDiv(column);
+        background-color: $light;
+        width: calc(100vw - 200px);
+        height: calc(100vh - 80px);
+        padding: 20px;
+        .user {
+            height: 20px;
+            width: 100%;
+            @include centerDiv();
+            color: $darkest;
+            border-bottom: 2px solid $basic;
+            padding-bottom: 5px;
+        }
+        .chat {
+            @include centerDiv(column);
+            justify-content: space-between;
+            align-items: start;
+
+            height: calc(100% - 20px);
+            width: 100%;
+            .messages {
+                margin-top: 10px;
+                height: calc(100% - 60px);
+                width: 100%;
+                // @include centerDiv(column);
+                gap: 10px;
+                .message {
+                    padding: 5px;
+                    color: $darkest;
+                }
+            }
+            .form {
+                border-radius: 5px;
+                height: 60px;
+                width: 100%;
+                @include centerDiv();
+                gap: 10px;
+                background-color: $dark;
+                .input {
+                    all: unset;
+
+                    padding: 5px;
+
+                    border-radius: 5px;
+                    background-color: $light;
+                    color: $darkest;
+
+                    &::placeholder {
+                        text-align: center;
+
+                        color: $darkest;
+                    }
+                }
+                .button {
+                    all: unset;
+                    padding: 5px;
+                    border-radius: 5px;
+                    background-color: $light;
+                    color: $darkest;
+                    &:hover {
+                        cursor: pointer;
+                        color: $light;
+                        background-color: $darkest;
+                    }
+                }
+            }
+        }
+    }
+}
