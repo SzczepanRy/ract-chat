@@ -21,4 +21,11 @@ export class UserController {
   ): Promise<UserDto | { message: string }> {
     return this.userService.addUser(login, password, groupname);
   }
+
+  @Post('findUsersByGroup')
+  findUsersByGroup(
+    @Body() { groupname }: { groupname: string },
+  ): Promise<UserDto[] | { message: string }> {
+    return this.userService.findUserByGroup(groupname);
+  }
 }

@@ -36,13 +36,13 @@ export class UserService {
       return { message: 'User not created' };
     }
   }
-  async findUserBy(login: string) {
+  async findUserByGroup(groupname: string) {
     const users = await prisma.user.findMany({
       where: {
         groups: {
           some: {
-            user: {
-              login: login,
+            group: {
+              groupname: groupname,
             },
           },
         },

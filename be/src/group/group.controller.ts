@@ -16,7 +16,7 @@ export class GroupController {
   @Post('/findGroupsByLogin')
   findGroupByUser(
     @Body() { login }: { login: string },
-  ): Promise<GroupDto | { message: string }> {
-    return this.groupService.addGroup(login);
+  ): Promise<GroupDto[] | { message: string }> {
+    return this.groupService.findGroupsByUser(login);
   }
 }
