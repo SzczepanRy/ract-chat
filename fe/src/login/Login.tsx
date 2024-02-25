@@ -12,20 +12,29 @@ export default function Login() {
         const login = loginRef.current?.value as string;
         const password = passwordRef.current?.value as string;
 
-        const { message, valid } = await fetchLogin(login, password);
+        const data = await fetchLogin(login, password);
 
-        if (valid) {
+        if (!data.message) {
             //redirect
+            localStorage.setItem("loginData", JSON.stringify(data));
             navigate("/main");
         } else {
-            setValidCheck(message);
+            setValidCheck(data.message);
         }
     }
 
     return (
         <div className={styles.login}>
             <div className={styles.modal}>
-                <div className={styles.p}>{validCheck}</div>
+                <div
+                    className={styles.p}
+                    style={{
+                        padding: validCheck == "" ? "0px" : "5px",
+                        borderRadius: validCheck == "" ? "0px" : "5px",
+                    }}
+                >
+                    {validCheck}
+                </div>
                 <input type="text" className={styles.input} ref={loginRef} placeholder="login" />
                 <input type="text" ref={passwordRef} className={styles.input} placeholder="password" />
 

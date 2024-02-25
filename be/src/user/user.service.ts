@@ -10,48 +10,61 @@ export class UserService {
     groupname: string,
     // groupId: number,
   ) {
-    const newUser = await prisma.user.create({
-      data: {
-        login: login,
-        password: password,
+    try {
+      const newUser = await prisma.user.create({
+        data: {
+          login: login,
+          password: password,
 
-        groups: {
-          create: [
-            {
-              group: {
-                connect: {
-                  groupname: groupname,
+          groups: {
+            create: [
+              {
+                group: {
+                  connect: {
+                    groupname: groupname,
+                  },
                 },
               },
-            },
-          ],
+            ],
+          },
         },
-      },
-    });
-    console.log(newUser);
+      });
+      console.log(newUser);
 
-    if (newUser) {
       return newUser;
-    } else {
-      return { message: 'User not created' };
+    } catch (err) {
+      return { message: err };
     }
   }
   async findUserByGroup(groupname: string) {
-    const users = await prisma.user.findMany({
-      where: {
-        groups: {
-          some: {
-            group: {
-              groupname: groupname,
+    try {
+      const users = await prisma.user.findMany({
+        where: {
+          groups: {
+            some: {
+              group: {
+                groupname: groupname,
+              },
             },
           },
         },
-      },
-    });
-    if (users) {
+      });
       return users;
-    } else {
-      return { message: 'did not find any users' };
+    } catch (err) {
+      return { message: err };
+    }
+  }
+  async findUser(login: string, password: string) {
+    try {
+      const users = await prisma.user.findFirst({
+        where: {
+          login: login,
+          password: password,
+        },
+      });
+      return { id: users.id, login: users.login };
+    } catch (err) {
+      return { message: 'not a valid password' };
     }
   }
 }

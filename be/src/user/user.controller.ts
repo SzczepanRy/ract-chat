@@ -28,4 +28,10 @@ export class UserController {
   ): Promise<UserDto[] | { message: string }> {
     return this.userService.findUserByGroup(groupname);
   }
+  @Post('findUser')
+  findUsers(
+    @Body() { login, password }: { login: string; password: string },
+  ): Promise<{ id: number; login: string } | { message: string }> {
+    return this.userService.findUser(login, password);
+  }
 }
