@@ -2,11 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import style from "./Nav.module.scss";
+import { socket } from "../../socket";
 export default function Nav() {
     const navigate = useNavigate();
-
+    function disconnect() {
+        socket.disconnect();
+    }
     function logout() {
         localStorage.clear();
+        disconnect();
         navigate("/");
     }
 

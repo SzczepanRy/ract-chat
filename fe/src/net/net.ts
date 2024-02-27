@@ -13,7 +13,7 @@ export const addGroup = async (groupname: string) => {
 
     return data;
 };
-export const addUser = async (groupname: string, login: string, password: string) => {
+export const addUser = async (groupname: string, loginId: number, password: string) => {
     const res = await fetch("http://localhost:3000/user/add", {
         method: "post",
         headers: {
@@ -21,7 +21,7 @@ export const addUser = async (groupname: string, login: string, password: string
         },
         body: JSON.stringify({
             groupname,
-            login,
+            loginId,
             password,
         }),
     });
@@ -31,7 +31,7 @@ export const addUser = async (groupname: string, login: string, password: string
     return data;
 };
 export const addMessage = async (groupname: string, loginId: number, message: string) => {
-    const res = await fetch("http://localhost:3000/user/add", {
+    const res = await fetch("http://localhost:3000/message/add", {
         method: "post",
         headers: {
             "content-type": "application/json",
@@ -83,6 +83,8 @@ export const findMessages = async (groupname: string) => {
     return { message: "ok", valid: true, data };
 };
 export const findUsers = async (groupname: string) => {
+    console.log(groupname);
+
     const res = await fetch("http://localhost:3000/user/findUsersByGroup", {
         method: "post",
         headers: {

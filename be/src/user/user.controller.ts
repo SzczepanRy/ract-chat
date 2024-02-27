@@ -25,7 +25,7 @@ export class UserController {
   @Post('findUsersByGroup')
   findUsersByGroup(
     @Body() { groupname }: { groupname: string },
-  ): Promise<UserDto[] | { message: string }> {
+  ): Promise<{ id: number; login: string }[] | { message: string }> {
     return this.userService.findUserByGroup(groupname);
   }
   @Post('findUser')

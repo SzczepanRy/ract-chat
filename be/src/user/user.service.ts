@@ -49,7 +49,10 @@ export class UserService {
           },
         },
       });
-      return users;
+      let modUsers = users.map((user) => {
+        return { id: user.id, login: user.login };
+      });
+      return modUsers;
     } catch (err) {
       return { message: err };
     }

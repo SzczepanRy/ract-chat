@@ -2,11 +2,20 @@ import React, { useRef, useState } from "react";
 import { fetchLogin } from "../net/net";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
+import { socket } from "../socket";
 export default function Login() {
     const [validCheck, setValidCheck] = useState("");
     const loginRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
+
+    function connect() {
+        socket.connect();
+    }
+
+    function disconnect() {
+        socket.disconnect();
+    }
 
     async function handleLogin() {
         const login = loginRef.current?.value as string;
@@ -17,6 +26,7 @@ export default function Login() {
         if (!data.message) {
             //redirect
             localStorage.setItem("loginData", JSON.stringify(data));
+            connect();
             navigate("/main");
         } else {
             setValidCheck(data.message);

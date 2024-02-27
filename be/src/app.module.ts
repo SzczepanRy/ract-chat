@@ -9,9 +9,10 @@ import { GroupModule } from './group/group.module';
 import { UserService } from './user/user.service';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
+import { GatewayModule } from './gateway/gateway.module';
 
 @Module({
-  imports: [MessageModule, GroupModule, UserModule],
+  imports: [MessageModule, GroupModule, UserModule, GatewayModule],
   controllers: [AppController],
   providers: [AppService, UserService],
 })

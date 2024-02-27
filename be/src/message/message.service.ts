@@ -28,18 +28,36 @@ export class MessageService {
       return { message: err };
     }
   }
-  async finMessageByGroup(groupname: string) {
+  async findMessageByGroup(groupname: string) {
     try {
-      const messages = await prisma.post.findMany({
+      let messages = await prisma.post.findMany({
         where: {
           group: {
             groupname: groupname,
           },
         },
       });
-      console.log(messages);
+      // console.log(messages);
+      const users = await prisma.user.findMany({
+        where: {},
+      });
+      // console.log(users);
 
-      return messages;
+      let modMessages = messages.map(
+        ({ id, message, createdAt, authorId, groupId }) => {
+          let login = [];
+          users.map((el) => {
+            if (authorId == el.id) {
+              login.push(el.login);
+            }
+          });
+          return { id, createdAt, message, author: login[0], groupId };
+        },
+      );
+
+      // console.log(modMessages);
+
+      return modMessages;
     } catch (err) {
       return { message: err };
     }
